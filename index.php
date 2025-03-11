@@ -45,6 +45,7 @@ require_once('Operacao.php');
                 echo 'O resultado da subtração: ';
                 echo $operacao->subtrair();
                 break;
+                
             case 3:
                 echo 'O resultado da divisão: ';
                 echo $operacao->dividir();
