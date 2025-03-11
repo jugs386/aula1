@@ -1,3 +1,7 @@
+<?php
+require_once('Operacao.php');
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -9,61 +13,55 @@
 
 <body>
     <form action="" method="post">
-        <input type="number" name="mes" id="mes">
-        <input type="submit" name="btnVerificar" id="btnVerificar" value="Verificar">
+        <label>Valor 1:</label>
+        <input type="number" name="valor1" id="valor1"><br />
+        <label>Valor 2:</label>
+        <input type="number" name="valor2" id="valor2"><br />
+        <label>Operação:</label>
+        <select name="operacao" id="operacao">
+            <option value="0">SELECIONE</option>
+            <option value="1">Somar</option>
+            <option value="2">Subtrair</option>
+            <option value="3">Dividir</option>
+            <option value="4">Multiplicar</option>
+        </select><br />
+        <input type="submit" name="btnCalcular" id="btnCalcular" value="Calcular">
     </form>
+    <?php
+
+    
+    if (isset($_POST['btnCalcular'])) {
+
+        $operacao = new Operacao();
+        $operacao->setValor1($_POST['valor1']);
+        $operacao->setValor2($_POST['valor2']);
+
+        switch ($_POST['operacao']) {
+            case 1:
+                echo 'O resultado da soma: ';
+                echo $operacao->somar();
+                break;
+            case 2:
+                echo 'O resultado da subtração: ';
+                echo $operacao->subtrair();
+                break;
+            case 3:
+                echo 'O resultado da divisão: ';
+                echo $operacao->dividir();
+                break;
+            case 4:
+                echo 'O resultado da multiplicação: ';
+                echo $operacao->multiplicar();
+                break;
+    
+            default:
+                echo 'Selecione uma operação';
+                break;
+        }
+    
+    }
+    ?>
+
 </body>
 
 </html>
-
-<?php
-
-
-$nome = "Juliana";
-
-echo "<br/>" . gettype($nome);
-
-echo "<br/><br/>Minha <b>primeira</b> aula de PHP! " . $nome . "<br/>";
-
-$numero = 5;
-
-if ($numero > 5) {
-    echo "Numero maior que 5<br/>";
-} else {
-    echo "Numero menor ou igual a 5<br/>";
-}
-
-if ($numero > 5) {
-    echo "Numero maior que 5<br/>";
-} elseif ($numero == 5) {
-    echo "Numero é igual a 5<br/>";
-} else {
-    echo "Numero menor que 5<br/>";
-}
-
-if (isset($_POST['btnVerificar'])) {
-
-    $mes = $_POST['mes'];
-
-    switch ($mes) {
-        case 1:
-            echo 'Janeiro';
-            break;
-        case 2:
-            echo 'Fevereiro';
-            break;
-        case 3:
-            echo 'Março';
-            break;
-        case 4:
-            echo 'Abril';
-            break;
-        case 5:
-            echo 'Maio';
-            break;
-
-        default:
-            echo 'Não foi encontrado o mês selecionado';
-            break;
-    }
-}
